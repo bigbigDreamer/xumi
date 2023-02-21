@@ -12,7 +12,7 @@
 
 ## Composition
 
-![](https://cdn.jsdelivr.net/gh/bigbigDreamer/pic-bed@main/uPic/ke26yo.png)
+![](https://cdn.jsdelivr.net/gh/bigbigDreamer/pic-bed@main/uPic/jMGu4M.png)
 
 ## Vision
 
