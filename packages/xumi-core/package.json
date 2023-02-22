@@ -2,11 +2,18 @@
   "name": "@montagejs/xumi",
   "version": "1.0.0",
   "description": "",
+  "bin": {
+    "xm": "bin/xm.mjs"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@montagejs/xumi-dev": "workspace:^1.0.0",
+    "commander": "^10.0.0"
+  }
 }

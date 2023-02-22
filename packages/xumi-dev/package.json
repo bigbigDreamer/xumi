@@ -2,11 +2,19 @@
   "name": "@montagejs/xumi-dev",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.mjs",
+  "module": "index.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "chokidar": "^3.5.3",
+    "commander": "^10.0.0",
+    "npmlog": "^7.0.1",
+    "webpack": "^5.75.0",
+    "webpack-dev-server": "^4.11.1"
+  }
 }
