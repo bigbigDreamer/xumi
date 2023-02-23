@@ -1,9 +1,13 @@
 #!/usr/bin/env bun
 import {createCommand} from "commander";
+import {fork} from 'child_process';
+import path from './lib/resolvePath.mjs';
 import fw from './lib/fileWatcher.mjs';
+
+import logger from "./lib/logger.mjs";
 class CoreDev {
     constructor() {
-        fw.watch(this.#startServer);
+
     }
 
     register() {
@@ -20,10 +24,15 @@ class CoreDev {
     }
 
     #handleOption = (...rest) => {
-        const { port, https } = rest[0];
-        console.log(rest)
+        const { port, https, debug } = rest[0];
+        debug && (() => {
+            logger.level = 'verbose';
+        })()
+        logger.verbose(rest)
         port && this.#handlePort(port);
         https && this.#handleHttps();
+        const serverQuit = this.#startServer();
+        fw.watch((...rest) => this.#handleFw({ ...rest, serverQuit }));
     }
 
     #handlePort() {
@@ -31,11 +40,32 @@ class CoreDev {
     }
 
     #handleHttps() {
-        console.log("处理 https")
+        console.verbose("处理 https")
     }
 
-    #startServer() {
-        console.log("启动");
+    #startServer(isRestart) {
+        let serverProcess;
+        try {
+            // args: [port, isRestart]
+            serverProcess =  fork(
+                path.cliAbsolutePath('./lib/server.mjs'),
+        [['port', 8080], ['isRestart', isRestart ? 1 : 0]]
+            );
+
+            serverProcess.on('exit', code => code && process.exit(code));
+
+            return () => serverProcess.kill();
+        } catch (e) {
+            logger.error(e.toString(), "openChildProcessError");
+            return () => {
+                process.exit(1);
+            }
+        }
+    }
+
+    #handleFw({ serverQuit }) {
+        serverQuit();
+        this.#startServer({ isRestart: true });
     }
 }
 
