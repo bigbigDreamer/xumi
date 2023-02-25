@@ -1,1 +1,3 @@
-//sds444455555773344341212  q   q1212   q   qqw121
+module.exports = {
+    dev: 'production'
+}

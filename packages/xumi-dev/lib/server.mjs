@@ -1,5 +1,6 @@
 import Webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
+import detect from 'detect-port';
 import path from './resolvePath.mjs'
 import logoPrint from "./logoPrint.mjs";
 import logger from "./logger.mjs";
@@ -13,10 +14,20 @@ class XmServer {
             static: {
                 directory: path.appPath( "./dist")
             },
+            compress: true,
+            historyApiFallback: true,
+            open: true,
+            port: 8082,
             devMiddleware: {
                 index: true,
                 writeToDisk: true
-            }
+            },
+            client: {
+                overlay: {
+                    errors: true,
+                    warnings: false,
+                },
+            },
         }, this.complier);
         this.start();
     }

@@ -3,6 +3,7 @@ import {createCommand} from "commander";
 import {fork} from 'child_process';
 import path from './lib/resolvePath.mjs';
 import fw from './lib/fileWatcher.mjs';
+import  syncProjectConfig from './lib/syncProjectConfig.mjs';
 
 import logger from "./lib/logger.mjs";
 class CoreDev {
@@ -31,6 +32,7 @@ class CoreDev {
         logger.verbose(rest)
         port && this.#handlePort(port);
         https && this.#handleHttps();
+        syncProjectConfig();
         const serverQuit = this.#startServer();
         fw.watch((...rest) => this.#handleFw({ ...rest, serverQuit }));
     }

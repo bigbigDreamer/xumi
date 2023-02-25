@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "jsx": "react",
     "target": "ESNext",
     "module": "NodeNext",
     "lib": [
@@ -15,6 +16,6 @@
     /* Module Resolution Options */
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true,
+    "esModuleInterop": true
   }
 }
