@@ -17,8 +17,15 @@ function generateDefault() {
             template: path.cliAbsolutePath('./template.ejs'),
             title: 'XuMi App'
         }),
-        new CleanWebpackPlugin()
-    ]
+        new CleanWebpackPlugin(),
+        // new webpack.ProgressPlugin(
+        //     (p) => {
+        //         globalEventBus.emit('devProgress', p);
+        //         console.log(p, "百分比")
+        //     },
+        // )
+
+]
 }
 
 

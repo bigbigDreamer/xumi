@@ -1,33 +1,17 @@
 import Webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
-import detect from 'detect-port';
-import path from './resolvePath.mjs'
 import logoPrint from "./logoPrint.mjs";
 import logger from "./logger.mjs";
-import { baseConfig } from '../webpack/index.mjs'
+import { generateConfig } from '../webpack/index.mjs'
+import { generateDefaultServerConfig } from '../webpack/server/index.mjs';
 
 const parentArgs = process.argv.slice(2);
 class XmServer {
     constructor() {
+        const baseConfig = generateConfig()
         this.complier = Webpack(baseConfig);
         this.server = new WebpackDevServer({
-            static: {
-                directory: path.appPath( "./dist")
-            },
-            compress: true,
-            historyApiFallback: true,
-            open: true,
-            port: 8082,
-            devMiddleware: {
-                index: true,
-                writeToDisk: true
-            },
-            client: {
-                overlay: {
-                    errors: true,
-                    warnings: false,
-                },
-            },
+            ...generateDefaultServerConfig(this.complier, baseConfig),
         }, this.complier);
         this.start();
     }

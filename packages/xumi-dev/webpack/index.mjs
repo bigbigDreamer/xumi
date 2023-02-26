@@ -1,5 +1,5 @@
-import baseConfig from "./base.config.mjs";
+import { generateConfig } from "./base.config.mjs";
 
 export {
-    baseConfig
+    generateConfig
 }
