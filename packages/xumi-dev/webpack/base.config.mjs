@@ -3,19 +3,20 @@ import path from '../lib/resolvePath.mjs';
 import {generateDefaultPlugins} from './plugin/index.mjs';
 import {generateDefaultLoaders} from "./loader/index.mjs";
 import {generateDefaultOptimization} from './optimization/index.mjs';
+import {generateDefaultServerConfig} from './server/index.mjs';
 
 
-/** @type {import('webpack').Configuration}*/
+
 export function generateConfig(complier, _config) {
 
     return {
         mode: 'development',
         entry: path.appPath(`./src/${env.INPUT_FILE_NAME}`),
         output: {
-            filename: 'js/[name].js',
+            filename: 'js/[name].[contenthash].js',
             path: path.appPath('./dist'),
             publicPath: '/',
-            chunkFilename: 'js/[name].js',
+            chunkFilename: 'js/[name].[contenthash].js',
             clean: true,
             crossOriginLoading: 'anonymous',
             hashDigestLength: 10,
@@ -63,6 +64,7 @@ export function generateConfig(complier, _config) {
         ],
         optimization: {
             ...generateDefaultOptimization()
-        }
+        },
+        devServer: generateDefaultServerConfig
     };
 }

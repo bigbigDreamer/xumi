@@ -51,7 +51,8 @@ class CoreDev {
             // args: [port, isRestart]
             serverProcess =  fork(
                 path.cliAbsolutePath('./lib/server.mjs'),
-        [['port', 8080], ['isRestart', isRestart ? 1 : 0]]
+        [['port', 8080].toString(), ['isRestart', isRestart ? 1 : 0].toString()],
+                {stdio: "inherit", shell: true}
             );
 
             serverProcess.on('exit', code => code && process.exit(code));

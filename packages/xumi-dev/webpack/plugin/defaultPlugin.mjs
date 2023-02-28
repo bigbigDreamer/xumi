@@ -2,6 +2,7 @@ import webpack from "webpack";
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import {CleanWebpackPlugin} from "clean-webpack-plugin";
+import ProgressBarPlugin from 'progress-bar-webpack-plugin';
 import path from '../../lib/resolvePath.mjs';
 
 function generateDefault() {
@@ -18,13 +19,10 @@ function generateDefault() {
             title: 'XuMi App'
         }),
         new CleanWebpackPlugin(),
-        // new webpack.ProgressPlugin(
-        //     (p) => {
-        //         globalEventBus.emit('devProgress', p);
-        //         console.log(p, "百分比")
-        //     },
-        // )
-
+        // 进度条
+        new ProgressBarPlugin({
+            format: `  :msg [:bar] :percent (:elapsed s)`,
+        }),
 ]
 }
 

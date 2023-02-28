@@ -5,10 +5,13 @@ export default {
     test: /\.less$/,
     use: [
         ...styleLoader,
-        { loader: path.require.resolve('less-loader'), options: {
-            lessOptions: {
-                javascriptEnabled: true
+        {
+            loader: path.require.resolve('less-loader'),
+            options: {
+                lessOptions: {
+                    javascriptEnabled: true
+                }
             }
-            } }
+        }
     ]
 }

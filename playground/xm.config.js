@@ -1,3 +1,6 @@
 module.exports = {
-    dev: 'production'
+    mode: 'production',
+    devServer: {
+        port: 7072
+    }
 }
